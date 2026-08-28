@@ -1,0 +1,19 @@
+{
+  "name": "gum-org",
+  "private": true,
+  "description": "Bun workspace over the gum.jsx package checkouts, so their semver ranges resolve to the sibling directories before publishing",
+  "workspaces": [
+    "gum-jsx-core",
+    "gum-jsx-docs",
+    "gum-jsx-math",
+    "gum-jsx-node",
+    "gum-jsx-mark",
+    "gum-jsx-react",
+    "gum-jsx",
+    "gum-jsx/test/report"
+  ],
+  "scripts": {
+    "typecheck": "for p in gum-jsx-core gum-jsx-docs gum-jsx-math gum-jsx-node gum-jsx-mark gum-jsx-react gum-jsx; do echo \"== $p\" && (cd $p && bun tsc --noEmit) || exit 1; done",
+    "test": "cd gum-jsx && bun scripts/test.ts && cd ../gum-jsx-react && bun scripts/test.tsx"
+  }
+}

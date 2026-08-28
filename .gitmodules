@@ -1,0 +1,28 @@
+[submodule "gum-jsx-core"]
+	path = gum-jsx-core
+	url = git@github.com:CompendiumLabs/gum-jsx-core
+	branch = master
+[submodule "gum-jsx-docs"]
+	path = gum-jsx-docs
+	url = git@github.com:CompendiumLabs/gum-jsx-docs
+	branch = master
+[submodule "gum-jsx-math"]
+	path = gum-jsx-math
+	url = git@github.com:CompendiumLabs/gum-jsx-math
+	branch = master
+[submodule "gum-jsx-node"]
+	path = gum-jsx-node
+	url = git@github.com:CompendiumLabs/gum-jsx-node
+	branch = master
+[submodule "gum-jsx-mark"]
+	path = gum-jsx-mark
+	url = git@github.com:CompendiumLabs/gum-jsx-mark
+	branch = master
+[submodule "gum-jsx-react"]
+	path = gum-jsx-react
+	url = git@github.com:CompendiumLabs/react-gum-jsx
+	branch = master
+[submodule "gum-jsx"]
+	path = gum-jsx
+	url = git@github.com:CompendiumLabs/gum-jsx
+	branch = master
