@@ -149,12 +149,11 @@ bun add @gum-jsx/web --registry "$REG" > bun-add-web.log 2>&1 || { cat bun-add-w
 cat > web.ts <<'TS'
 import { loadFonts } from '@gum-jsx/core/fonts'
 import { fontCss, embedFonts, installFontFaces } from '@gum-jsx/web'
-import { rasterizeGif } from '@gum-jsx/web/gif'
 import { evaluateGum } from '@gum-jsx/core/eval'
 await loadFonts()
 installFontFaces()
 const svg = embedFonts(evaluateGum('<Text>hi</Text>', { size: 100 })).svg()
-if (!svg.includes('@font-face') || fontCss().length < 1000 || typeof rasterizeGif != 'function') { console.error('FAIL: web'); process.exit(1) }
+if (!svg.includes('@font-face') || fontCss().length < 1000) { console.error('FAIL: web'); process.exit(1) }
 TS
 bun web.ts || fail "@gum-jsx/web"
 
