@@ -26,3 +26,7 @@
 	path = gum-jsx
 	url = git@github.com:CompendiumLabs/gum-jsx
 	branch = master
+[submodule "gum-jsx-web"]
+	path = gum-jsx-web
+	url = git@github.com:CompendiumLabs/gum-jsx-web
+	branch = master

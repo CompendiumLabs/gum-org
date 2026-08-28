@@ -19,7 +19,7 @@ set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 PORT=${PORT:-4873}
 REG="http://localhost:$PORT/"
-ORDER=(gum-jsx-core gum-jsx-docs gum-jsx-math gum-jsx-node gum-jsx-mark gum-jsx-react gum-jsx)
+ORDER=(gum-jsx-core gum-jsx-docs gum-jsx-math gum-jsx-node gum-jsx-mark gum-jsx-web gum-jsx-react gum-jsx)
 
 WORK=$(mktemp -d -t gum-rehearse.XXXXXX)
 NPMRC="$WORK/.npmrc"
@@ -142,6 +142,21 @@ export default function Scene() {
 }
 TSX
 bunx gum-react comp.tsx -s 300 | grep -q '<svg' || fail "gum-react"
+
+say "@gum-jsx/web from the registry (not a gum-jsx dependency, so installed on its own)"
+cd "$APP"
+bun add @gum-jsx/web --registry "$REG" > bun-add-web.log 2>&1 || { cat bun-add-web.log; fail "bun add @gum-jsx/web"; }
+cat > web.ts <<'TS'
+import { loadFonts } from '@gum-jsx/core/fonts'
+import { fontCss, embedFonts, installFontFaces } from '@gum-jsx/web'
+import { rasterizeGif } from '@gum-jsx/web/gif'
+import { evaluateGum } from '@gum-jsx/core/eval'
+await loadFonts()
+installFontFaces()
+const svg = embedFonts(evaluateGum('<Text>hi</Text>', { size: 100 })).svg()
+if (!svg.includes('@font-face') || fontCss().length < 1000 || typeof rasterizeGif != 'function') { console.error('FAIL: web'); process.exit(1) }
+TS
+bun web.ts || fail "@gum-jsx/web"
 
 say "npm install (resolution only)"
 mkdir -p "$WORK/app-npm" && cd "$WORK/app-npm"
