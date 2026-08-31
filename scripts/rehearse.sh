@@ -119,7 +119,7 @@ import { evaluateGum } from 'gum-jsx/eval'
 import { mathToSvg } from 'gum-jsx/math'
 import { mathToPng } from 'gum-jsx/render'
 import { getDocs } from 'gum-jsx/meta'
-import { runTests } from 'gum-jsx/test'
+import { runUnitTests } from 'gum-jsx/test'
 import { displayMarkdown } from 'gum-jsx/mark'
 import { rasterizeSvg } from '@gum-jsx/node'
 const check = (name: string, ok: boolean) => { if (!ok) { console.error(`FAIL: ${name}`); process.exit(1) } }
@@ -129,14 +129,14 @@ check('mathToSvg', mathToSvg('x^2').includes('<svg'))
 check('mathToPng', (await mathToPng('x^2')).length > 100)
 check('getDocs', Object.keys(getDocs().tags).length > 10)
 check('rasterizeSvg', (await rasterizeSvg(evaluateGum('<Circle />').svg())).length > 100)
-check('displayMarkdown/runTests', typeof displayMarkdown == 'function' && typeof runTests == 'function')
+check('displayMarkdown/runUnitTests', typeof displayMarkdown == 'function' && typeof runUnitTests == 'function')
 TS
 bun use.ts || fail "library imports"
 
-say "runTests on a custom group"
+say "runUnitTests on a custom group"
 echo '<Square fill={red} />' > ex/code/sq.jsx
-bun -e "import { runTests } from 'gum-jsx/test'; process.exit(runTests({ groups: [{ name: 'ex', dir: 'ex/code' }] }).failed)" > /dev/null 2>&1 \
-    || fail "runTests"
+bun -e "import { runUnitTests } from 'gum-jsx/test'; process.exit(runUnitTests({ groups: [{ name: 'ex', dir: 'ex/code' }] }).failed)" > /dev/null 2>&1 \
+    || fail "runUnitTests"
 
 say "gum-react CLI"
 cat > comp.tsx <<'TSX'
