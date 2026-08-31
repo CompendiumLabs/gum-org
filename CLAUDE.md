@@ -28,9 +28,12 @@ the workspace.
 
 Every package ships its TypeScript source directly (`exports` point at `src/*.ts`, as the
 published `gum-jsx` always has), so there is no build step; bun runs it as is. The add-ons take
-core as a **peer** dependency because they register into core's element and font registries and a
-host must therefore have exactly one core; each also lists core under `devDependencies` so it
-typechecks standalone. `@gum-jsx/*` and `gum-jsx` are versioned in lockstep (`1.7.0`);
+core as a **peer** dependency because their elements subclass core's and are built against a core
+`Env` (the evaluation environment: element registry, bindings, fonts, theme, strict mode; see
+`gum-jsx-core/CLAUDE.md`), so a host must have exactly one core; each also lists core under
+`devDependencies` so it typechecks standalone. `@gum-jsx/math` is a plugin (`gum.use(math)`);
+importing it has no side effects, and the batteries-included `gum-jsx` is what applies it to the
+default Env. `@gum-jsx/*` and `gum-jsx` are versioned in lockstep (`1.7.0`);
 `@gum-jsx/react` has its own line (`0.1.0`).
 
 ## Commands
@@ -38,7 +41,7 @@ typechecks standalone. `@gum-jsx/*` and `gum-jsx` are versioned in lockstep (`1.
 ```bash
 bun install            # once, here: links the workspace and installs everything
 bun run typecheck      # bun tsc --noEmit in every package
-bun run test           # the gum-jsx example suite (strict mode) and the react tests
+bun run test           # the gum-jsx suite (Env checks + every example in strict mode), the react and web tests
 scripts/rehearse.sh    # publish to a local registry and install from it (below)
 ```
 

@@ -72,6 +72,11 @@ TOKEN=$(curl -sf -X PUT "$REG-/user/org.couchdb.user:rehearse" \
 [ -n "$TOKEN" ] || fail "could not create a registry user"
 printf 'registry=%s\n//localhost:%s/:_authToken=%s\n' "$REG" "$PORT" "$TOKEN" > "$NPMRC"
 
+# fresh caches: a package published here can share a version with one on real
+# npm (rehearsing before the lockstep bump, or after a fix), and bun's global
+# install cache would happily serve the stale public tarball for it
+export BUN_INSTALL_CACHE_DIR="$WORK/bun-cache" npm_config_cache="$WORK/npm-cache"
+
 # --- publish ----------------------------------------------------------------
 
 for pkg in "${ORDER[@]}"; do
@@ -147,12 +152,11 @@ say "@gum-jsx/web from the registry (not a gum-jsx dependency, so installed on i
 cd "$APP"
 bun add @gum-jsx/web --registry "$REG" > bun-add-web.log 2>&1 || { cat bun-add-web.log; fail "bun add @gum-jsx/web"; }
 cat > web.ts <<'TS'
-import { loadFonts } from '@gum-jsx/core/fonts'
+import { gum } from '@gum-jsx/core'
 import { fontCss, embedFonts, installFontFaces } from '@gum-jsx/web'
-import { evaluateGum } from '@gum-jsx/core/eval'
-await loadFonts()
+await gum.loadFonts()
 installFontFaces()
-const svg = embedFonts(evaluateGum('<Text>hi</Text>', { size: 100 })).svg()
+const svg = embedFonts(gum.evaluate('<Text>hi</Text>', { size: 100 })).svg()
 if (!svg.includes('@font-face') || fontCss().length < 1000) { console.error('FAIL: web'); process.exit(1) }
 TS
 bun web.ts || fail "@gum-jsx/web"

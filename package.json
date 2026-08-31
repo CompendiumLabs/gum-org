@@ -15,6 +15,6 @@
   ],
   "scripts": {
     "typecheck": "for p in gum-jsx-core gum-jsx-docs gum-jsx-math gum-jsx-node gum-jsx-mark gum-jsx-web gum-jsx-react gum-jsx; do echo \"== $p\" && (cd $p && bun tsc --noEmit) || exit 1; done",
-    "test": "cd gum-jsx && bun scripts/test.ts && cd ../gum-jsx-react && bun scripts/test.tsx && cd ../gum-jsx-web && bun scripts/test.ts"
+    "test": "cd gum-jsx && bun test/run.ts && cd ../gum-jsx-react && bun scripts/test.tsx && cd ../gum-jsx-web && bun scripts/test.ts"
   }
 }
