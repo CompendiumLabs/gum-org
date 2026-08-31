@@ -7,17 +7,17 @@
     },
     "gum-jsx": {
       "name": "gum-jsx",
-      "version": "1.7.0",
+      "version": "1.7.1",
       "bin": {
-        "gum": "./scripts/gum.ts",
-        "gum-tex": "./scripts/tex.ts",
-        "gum-mark": "./scripts/mark.ts",
+        "gum": "scripts/gum.ts",
+        "gum-tex": "scripts/tex.ts",
+        "gum-mark": "scripts/mark.ts",
       },
       "dependencies": {
-        "@gum-jsx/core": "^1.7.0",
+        "@gum-jsx/core": "^1.7.1",
         "@gum-jsx/docs": "^1.7.0",
         "@gum-jsx/mark": "^1.7.0",
-        "@gum-jsx/math": "^1.7.0",
+        "@gum-jsx/math": "^1.7.1",
         "@gum-jsx/node": "^1.7.0",
         "commander": "^14.0.3",
       },
@@ -30,7 +30,7 @@
     },
     "gum-jsx-core": {
       "name": "@gum-jsx/core",
-      "version": "1.7.0",
+      "version": "1.7.1",
       "dependencies": {
         "@types/papaparse": "^5.5.2",
         "acorn": "^8.15.0",
@@ -75,7 +75,7 @@
     },
     "gum-jsx-math": {
       "name": "@gum-jsx/math",
-      "version": "1.7.0",
+      "version": "1.7.1",
       "dependencies": {
         "katex": "^0.16.33",
       },
