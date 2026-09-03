@@ -7,7 +7,7 @@
     },
     "gum-jsx": {
       "name": "gum-jsx",
-      "version": "1.8.0",
+      "version": "1.9.0",
       "bin": {
         "gum": "scripts/gum.ts",
         "gum-tex": "scripts/tex.ts",
@@ -30,7 +30,7 @@
     },
     "gum-jsx-core": {
       "name": "@gum-jsx/core",
-      "version": "1.8.0",
+      "version": "1.9.0",
       "dependencies": {
         "@types/papaparse": "^5.5.2",
         "acorn": "^8.15.0",
@@ -47,7 +47,7 @@
     },
     "gum-jsx-docs": {
       "name": "@gum-jsx/docs",
-      "version": "1.8.0",
+      "version": "1.9.0",
       "devDependencies": {
         "@types/node": "^25.2.3",
         "commander": "^14.0.3",
@@ -56,68 +56,68 @@
     },
     "gum-jsx-mark": {
       "name": "@gum-jsx/mark",
-      "version": "1.8.0",
+      "version": "1.9.0",
       "dependencies": {
         "marked": "^18.0.5",
       },
       "devDependencies": {
-        "@gum-jsx/core": "^1.8.0",
-        "@gum-jsx/math": "^1.8.0",
-        "@gum-jsx/node": "^1.8.0",
+        "@gum-jsx/core": "^1.9.0",
+        "@gum-jsx/math": "^1.9.0",
+        "@gum-jsx/node": "^1.9.0",
         "@types/node": "^25.2.3",
         "typescript": "^5.9.3",
       },
       "peerDependencies": {
-        "@gum-jsx/core": "^1.8.0",
-        "@gum-jsx/math": "^1.8.0",
-        "@gum-jsx/node": "^1.8.0",
+        "@gum-jsx/core": "^1.9.0",
+        "@gum-jsx/math": "^1.9.0",
+        "@gum-jsx/node": "^1.9.0",
       },
     },
     "gum-jsx-math": {
       "name": "@gum-jsx/math",
-      "version": "1.8.0",
+      "version": "1.9.0",
       "dependencies": {
         "katex": "^0.16.33",
       },
       "devDependencies": {
-        "@gum-jsx/core": "^1.8.0",
+        "@gum-jsx/core": "^1.9.0",
         "@types/node": "^25.2.3",
         "typescript": "^5.9.3",
       },
       "peerDependencies": {
-        "@gum-jsx/core": "^1.8.0",
+        "@gum-jsx/core": "^1.9.0",
       },
     },
     "gum-jsx-node": {
       "name": "@gum-jsx/node",
-      "version": "1.8.0",
+      "version": "1.9.0",
       "dependencies": {
         "canvas": "^3.2.3",
       },
       "devDependencies": {
-        "@gum-jsx/core": "^1.8.0",
-        "@gum-jsx/docs": "^1.8.0",
+        "@gum-jsx/core": "^1.9.0",
+        "@gum-jsx/docs": "^1.9.0",
         "@types/node": "^25.2.3",
         "typescript": "^5.9.3",
       },
       "peerDependencies": {
-        "@gum-jsx/core": "^1.8.0",
+        "@gum-jsx/core": "^1.9.0",
       },
     },
     "gum-jsx-react": {
       "name": "@gum-jsx/react",
-      "version": "0.2.0",
+      "version": "1.9.0",
       "bin": {
         "gum-react": "scripts/gum-react.tsx",
       },
       "dependencies": {
-        "@gum-jsx/math": "^1.8.0",
+        "@gum-jsx/math": "^1.9.0",
         "@types/react-reconciler": "^0.33.0",
         "commander": "^14.0.3",
         "react-reconciler": "^0.33.0",
       },
       "devDependencies": {
-        "@gum-jsx/core": "^1.8.0",
+        "@gum-jsx/core": "^1.9.0",
         "@types/bun": "^1.3.13",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
@@ -126,22 +126,22 @@
         "typescript": "^5.9.3",
       },
       "peerDependencies": {
-        "@gum-jsx/core": "^1.8.0",
+        "@gum-jsx/core": "^1.9.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
       },
     },
     "gum-jsx-web": {
       "name": "@gum-jsx/web",
-      "version": "1.8.0",
+      "version": "1.9.0",
       "devDependencies": {
-        "@gum-jsx/core": "^1.8.0",
-        "@gum-jsx/math": "^1.8.0",
+        "@gum-jsx/core": "^1.9.0",
+        "@gum-jsx/math": "^1.9.0",
         "@types/node": "^25.2.3",
         "typescript": "^5.9.3",
       },
       "peerDependencies": {
-        "@gum-jsx/core": "^1.8.0",
+        "@gum-jsx/core": "^1.9.0",
       },
     },
     "gum-jsx/test/report": {

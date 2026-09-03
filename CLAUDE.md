@@ -5,7 +5,7 @@ repo. Each commit here pins the exact commit of every package, so the set of che
 developed and tested together is a recoverable state, and
 `git clone --recurse-submodules` reproduces the whole org. The root is also a private bun
 workspace (`package.json`) over the submodules, so the packages' ordinary semver dependencies on
-each other (`"@gum-jsx/core": "^1.8.0"`, ...) resolve to the sibling directories instead of npm.
+each other (`"@gum-jsx/core": "^1.9.0"`, ...) resolve to the sibling directories instead of npm.
 `bun install` here (or in any member — bun finds the root by walking up) installs everything and
 writes the single `bun.lock` here; the members keep no lockfile of their own while they live in
 the workspace.
@@ -33,8 +33,8 @@ core as a **peer** dependency because their elements subclass core's and are bui
 `gum-jsx-core/CLAUDE.md`), so a host must have exactly one core; each also lists core under
 `devDependencies` so it typechecks standalone. `@gum-jsx/math` is a plugin (`gum.use(math)`);
 importing it has no side effects, and the batteries-included `gum-jsx` is what applies it to the
-default Env. `@gum-jsx/*` and `gum-jsx` are versioned in lockstep (`1.8.0`);
-`@gum-jsx/react` has its own line (`0.2.0`).
+default Env. `@gum-jsx/*` and `gum-jsx` are versioned in lockstep (`1.9.0`);
+`@gum-jsx/react` follows the same line.
 
 ## Commands
 
