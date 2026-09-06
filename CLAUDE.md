@@ -21,7 +21,8 @@ the workspace.
 | `gum-jsx-web` | `@gum-jsx/web` | Browser runtime: FontFace installation, font embedding, canvas rasterizing; core is a peer |
 | `gum-jsx-docs` | `@gum-jsx/docs` | The docs and gallery examples plus the Claude skill; no dependencies |
 | `gum-jsx-react` | `@gum-jsx/react` | React renderer and the `gum-react` CLI; core, react and react-dom are peers |
-| `gum-jsx` | `gum-jsx` | Batteries included: depends on the five libraries, ships the `gum`/`gum-tex`/`gum-mark` bins and the test suite |
+| `gum-jsx-pdf` | `@gum-jsx/pdf` | Vector PDF renderer (PDFKit and SVG-to-PDFKit); core is a peer |
+| `gum-jsx` | `gum-jsx` | Batteries included: depends on the six libraries, ships the `gum`/`gum-tex`/`gum-mark` bins and the test suite |
 
 `gum-jsx/test/report` (the suite's render browser, private) is also a workspace member so its
 `@gum-jsx/core` resolves locally.
@@ -74,7 +75,7 @@ each run, so re-publishing the same version after a fix is fine.
 ## Publishing
 
 Publish in dependency order so each version is on npm before something depends on it:
-`core`, `docs`, `math`, `node`, `mark`, `web`, then `react` and `gum-jsx`. From each directory:
+`core`, `docs`, `math`, `node`, `mark`, `web`, `react`, `pdf`, then `gum-jsx`. From each directory:
 
 ```bash
 npm publish    # or: bun publish (the scoped packages carry publishConfig.access = public)

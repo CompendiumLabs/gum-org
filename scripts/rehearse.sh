@@ -19,7 +19,7 @@ set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 PORT=${PORT:-4873}
 REG="http://localhost:$PORT/"
-ORDER=(gum-jsx-core gum-jsx-docs gum-jsx-math gum-jsx-node gum-jsx-mark gum-jsx-web gum-jsx-react gum-jsx)
+ORDER=(gum-jsx-core gum-jsx-docs gum-jsx-math gum-jsx-node gum-jsx-mark gum-jsx-web gum-jsx-react gum-jsx-pdf gum-jsx)
 
 WORK=$(mktemp -d -t gum-rehearse.XXXXXX)
 NPMRC="$WORK/.npmrc"
@@ -100,7 +100,7 @@ cp "$NPMRC" .npmrc
 
 say "bun add gum-jsx @gum-jsx/react (from the local registry)"
 bun add gum-jsx @gum-jsx/react react react-dom --registry "$REG" > bun-add.log 2>&1 || { cat bun-add.log; fail "bun add"; }
-for name in core docs math node mark react; do
+for name in core docs math node mark pdf react; do
     [ -e "node_modules/@gum-jsx/$name" ] || fail "@gum-jsx/$name not installed"
 done
 for bin in gum gum-tex gum-mark gum-react; do
@@ -111,6 +111,10 @@ say "bins"
 echo '<Rectangle rounded fill={blue} />' | bunx gum -f svg | grep -q '<svg' || fail "gum -f svg"
 bunx gum-tex '\sqrt{2}' -f svg | grep -q '<svg' || fail "gum-tex"
 printf 'hi $y=x^2$\n' | bunx gum-mark | grep -q $'\e_G' || fail "gum-mark (no kitty image in output)"
+
+say "PDF support"
+echo '<Circle />' | bunx gum -f pdf -o one.pdf || fail "gum -f pdf"
+[ "$(head -c 4 one.pdf)" = '%PDF' ] || fail "gum PDF output"
 
 say "library imports (every gum-jsx subpath)"
 cat > use.ts <<'TS'
@@ -161,11 +165,17 @@ cp "$NPMRC" .npmrc
 npm install gum-jsx @gum-jsx/react react react-dom --ignore-scripts --registry "$REG" --userconfig "$NPMRC" > npm.log 2>&1 \
     || { cat npm.log; fail "npm install"; }
 [ -e node_modules/.bin/gum ] || fail "npm did not link the gum bin"
+[ -e node_modules/@gum-jsx/pdf/src/index.ts ] || fail "npm did not install the @gum-jsx/pdf source"
+for dep in pdfkit svg-to-pdfkit fontkit @xmldom/xmldom; do
+    [ -e "node_modules/$dep" ] || fail "npm did not install @gum-jsx/pdf dependency $dep"
+done
 
 say "global bun install (isolated global dir)"
 export BUN_INSTALL_GLOBAL_DIR="$WORK/global" BUN_INSTALL_BIN="$WORK/global/bin"
 bun install -g gum-jsx @gum-jsx/react --registry "$REG" > "$WORK/global.log" 2>&1 || { cat "$WORK/global.log"; fail "bun install -g"; }
 echo '<Circle />' | "$WORK/global/bin/gum" -f svg | grep -q '<svg' || fail "global gum"
+echo '<Circle />' | "$WORK/global/bin/gum" -f pdf -o "$WORK/global.pdf" || fail "global gum PDF"
+[ "$(head -c 4 "$WORK/global.pdf")" = '%PDF' ] || fail "global gum PDF output"
 "$WORK/global/bin/gum-react" "$APP/comp.tsx" -s 100 | grep -q '<svg' || fail "global gum-react"
 
 say "all rehearsal checks passed"
