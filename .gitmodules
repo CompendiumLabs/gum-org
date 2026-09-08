@@ -32,4 +32,4 @@
 	branch = master
 [submodule "gum-jsx-pdf"]
 	path = gum-jsx-pdf
-	url = ./gum-jsx-pdf
+	url = git@github.com:CompendiumLabs/gum-jsx-pdf
